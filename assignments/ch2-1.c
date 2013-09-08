@@ -11,15 +11,19 @@ int main ( void )
 	//Initialise variables
 	int integer1, integer2, largest;
 
-	printf("Enter an integer:"); 
+	//Prompt for input
+	printf("This program will return the larger of two numbers.\n");
+	printf("Enter an integer: "); 
 	scanf("%d", &integer1);
-
-	printf("Enter another integer:"); 
+	printf("Enter another integer: "); 
 	scanf("%d", &integer2);
 
+	//Check if numbers are equal
 	if (integer1 == integer2) {
 		printf("The integers are equal.\n");
 	}
+	
+	//Determine the larger number
 	else{
 		if (integer1 > integer2) {
 			largest = integer1;
@@ -27,9 +31,8 @@ int main ( void )
 		if (integer1 < integer2) {
 			largest = integer2;
 		}
+		printf("The larger number is %d.\n", largest);
 	}
-
-	printf("The larger number is %d.\n", largest);
 
 	return 0; /*indicate that program ended successfully */
 } /* end function main */
