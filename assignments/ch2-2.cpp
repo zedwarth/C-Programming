@@ -48,8 +48,8 @@ int main ( void )
 
 	//Find the average
 	average = sum / 3;
-	if ((sum % 3) >= 5) { //round up if appropriate
-		average ++;
+	if (sum % 3 == 2) { //round up if appropriate
+		average = average + 1;
 	}
 
 	//Print the answers
