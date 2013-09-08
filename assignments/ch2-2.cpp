@@ -13,7 +13,7 @@ int main ( void )
 	int a, b, c, smallest, largest, sum, average;
 
 	//Prompt for input
-	printf("Please input three integers.\n");
+	printf("Please enter three integers.\n");
 	printf("First: "); 
 	scanf("%d", &a);
 	printf("Second: "); 
@@ -22,26 +22,41 @@ int main ( void )
 	scanf("%d", &c);
 
 	//Find the smallest
-	if (a == b) {
+	if ((a < b) & (a < c)) {
 		smallest = a;
-		if (smallest > c) {
-			smallest = c;
-		}
 	}
-	if (a < b) {
-		smallest = a;
-		if (smallest > 
-	
-	//Determine the larger number
-	else{
-		if (integer1 > integer2) {
-			largest = integer1;
-		}
-		if (integer1 < integer2) {
-			largest = integer2;
-		}
-		printf("The larger number is %d.\n", largest);
+	if ((b < a) & (b < c)) {
+		smallest = b;
 	}
+	if ((c < a) & (c < b)) {
+		smallest = c;
+	}
+
+	//Find the largest
+	if ((a > b) & (a > c)) {
+		largest = a;
+	}
+	if ((b > a) & (b > c)) {
+		largest = b;
+	}
+	if ((c > a) & (c > b)) {
+		largest = c;
+	}
+
+	//Find the sum
+	sum = a+b+c;
+
+	//Find the average
+	average = sum / 3;
+	if ((sum % 3) >= 5) { //round up if appropriate
+		average ++;
+	}
+
+	//Print the answers
+	printf("The smallest is %d.\n", smallest);
+	printf("The largest is %d.\n", largest);
+	printf("The sum is %d.\n", sum);
+	printf("The average is %d.\n", average);
 
 	return 0; /*indicate that program ended successfully */
 } /* end function main */
