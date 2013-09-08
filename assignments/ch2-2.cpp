@@ -22,24 +22,24 @@ int main ( void )
 	scanf("%d", &c);
 
 	//Find the smallest
-	if ((a < b) & (a < c)) {
+	if ((a <= b) & (a <= c)) {
 		smallest = a;
 	}
-	if ((b < a) & (b < c)) {
+	if ((b <= a) & (b <= c)) {
 		smallest = b;
 	}
-	if ((c < a) & (c < b)) {
+	if ((c <= a) & (c <= b)) {
 		smallest = c;
 	}
 
 	//Find the largest
-	if ((a > b) & (a > c)) {
+	if ((a >= b) & (a >= c)) {
 		largest = a;
 	}
-	if ((b > a) & (b > c)) {
+	if ((b >= a) & (b >= c)) {
 		largest = b;
 	}
-	if ((c > a) & (c > b)) {
+	if ((c >= a) & (c >= b)) {
 		largest = c;
 	}
 
