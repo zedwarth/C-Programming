@@ -1,4 +1,4 @@
-/* Fig. .: fig0_0.c
+/* Fig. x.x: fig0x_0x.c
  * */
 #include <stdio.h>
 
