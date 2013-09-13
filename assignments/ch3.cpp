@@ -8,48 +8,54 @@
 /* function main begins program execution */
 int main ( void )
 {
-	int input, output, ones, tens, hundreds, thousands;
-	int mode = 0;
+	int input, mode, sentinel, ones, tens, hundreds, thousands;
+	mode = sentinel = 0;
 
-	printf("Encode (1) Decode (2) : ");
-	scanf("%d", &mode);
+	do {
 
-	printf("Enter a  four digit number: ");
-	scanf("%d", &input);
+		printf("Encode (1) Decode (2) : ");
+		scanf("%d", &mode);
 
-	ones = input % 10;
-	input /= 10;
-	tens = input % 10;
-	input /= 10;
-	hundreds = input % 10;
-	input /= 10;
-	thousands = input;
-/*	printf("%d\n", ones);
-	printf("%d\n", tens);
-	printf("%d\n", hundreds);
-	printf("%d\n", thousands);
-*/
-	//Encode
-	if (mode == 1) { //encode
-		ones = (ones + 7) % 10;
-		tens = (tens + 7) % 10;
-		hundreds = (hundreds + 7) % 10;
-		thousands = (thousands + 7) % 10;
-	}
+		printf("Enter a  four digit number: ");
+		scanf("%d", &input);
 
-	//Decode
-	if (mode == 2) {
-		ones = (ones + 3) % 10;
-		tens = (tens + 3) % 10;
-		hundreds = (hundreds + 3) % 10;
-		thousands = (thousands + 3) % 10;
-	}
+		ones = input % 10;
+		input /= 10;
+		tens = input % 10;
+		input /= 10;
+		hundreds = input % 10;
+		input /= 10;
+		thousands = input;
+		
+		//Encode
+		if (mode == 1) { //encode
+			ones = (ones + 7) % 10;
+			tens = (tens + 7) % 10;
+			hundreds = (hundreds + 7) % 10;
+			thousands = (thousands + 7) % 10;
+			printf("Encoded Digits: ");
+		}
 
-	//Print swapped digits
-	printf("%d", tens);
-	printf("%d", ones);
-	printf("%d", thousands);
-	printf("%d\n", hundreds);
+		//Decode
+		if (mode == 2) {
+			ones = (ones + 3) % 10;
+			tens = (tens + 3) % 10;
+			hundreds = (hundreds + 3) % 10;
+			thousands = (thousands + 3) % 10;
+			printf("Decoded Digits: ");
+		}
+
+		//Print swapped digits
+		printf("%d", tens);
+		printf("%d", ones);
+		printf("%d", thousands);
+		printf("%d\n", hundreds);
+
+		//Countinue or Exit; Assume Exit
+		printf("Continue (1) Exit (0): ");
+		scanf("%d", &sentinel);
+
+	}while (sentinel == 1);
 
 	return 0; /*indicate that program ended successfully */
 } /* end function main */
