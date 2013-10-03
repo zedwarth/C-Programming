@@ -1,6 +1,7 @@
 /* Seth Szymanski
- * Chapter *, Assignment *
- * gcc (GCC) 4.8.1 20130725 (prerelease)
+ * Chapter * Assignment 
+ * clang version 3.3
+ * Description
  * */
 #include <stdio.h>
 
