@@ -14,7 +14,7 @@ typedef struct card Card; /* new type name for struct card */
 
 /* prototypes */
 void fillDeck( Card * const wDeck, const char * wFace[],
-	const char * wSui[] );
+	const char * wSuit[] );
 void shuffle( Card * const wDeck );
 void deal( const Card * const wDesk );
 
@@ -47,7 +47,7 @@ void fillDeck( Card * const wDeck, const char * wFace[],
 	/* loop through wDeck */
 	for ( i = 0; i <= 51; i++ ) {
 		wDeck[ i ].face = wFace[ i % 13 ];
-		wDeck[ i ]. suit = wSuit[ i /13 ];
+		wDeck[ i ].suit = wSuit[ i / 13 ];
 	} /* end for */
 } /* end function fillDeck */
 
