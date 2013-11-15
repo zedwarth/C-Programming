@@ -65,7 +65,7 @@ int main ( void )
 } /* end main */
 
 /* display program instructions to user */
-void instrucitons( void )
+void instructions( void )
 {
 	printf( "Enter choice:\n"
 			"1 to push a value on the stack\n"
