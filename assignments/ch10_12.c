@@ -141,7 +141,6 @@ char delete( ListNodePtr *sPtr, char value )
 	if ( value == ( *sPtr )->data ) {
 		tempPtr = *sPtr; /* hold onto node being removed */
 		*sPtr = ( *sPtr )->nextPtr; /* de-thread the node */
-		( *sPtr )->prevPtr = NULL; 
 		free( tempPtr ); /* free the de-threaded node */
 		return value;
 	} /* end if */
