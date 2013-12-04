@@ -16,7 +16,7 @@ int main ( void )
 	printf("The product of %ld and %ld is: %ld\n", c, a, multiply( 2, c, a ));
 	printf("The product of %ld, %ld, and %ld is: %ld\n", b, e, g, multiply( 3, b, e, g ));
 	printf("The product of %ld, %ld, %ld, and %ld is: %ld\n", f, c, a, g, multiply( 4, f, c, a, g ));
-	printf("The product of %ld, %ld, %ld, and %ld is: %ld\n", f, c, z, g, multiply( 4, f, c, z, g ));
+	printf("The product of %ld, %ld, %ld, %ld, and %ld is: %ld\n", f, c, z, g, a, multiply( 5, f, c, z, g, a ));
 	return 0; /*indicate that program ended successfully */
 } /* end function main */
 
