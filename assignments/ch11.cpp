@@ -5,16 +5,15 @@
  * */
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-/* tootData structure definition */
+/* toolData structure definition */
 struct toolData {
 	int recordNum; 		/* record number */
 	char toolName [ 20 ]; 	/* tool name */
 	double cost;   		/* tool cost */
 	int quantity;  		/* amount of tool in stock */
 };
-
-struct toolData tool = { 0, "", 0.0, 0 }; //blank
 
 /* Function Prototypes */
 int enterChoice( void );
@@ -29,6 +28,7 @@ int main ( void )
 	/* Check to see if database exists and if it doesn't, make it */
 	if( access( "hardware.dat", F_OK ) == -1 ) {
 		int i; /* counter */
+		struct toolData tool = { 0, "", 0.0, 0 }; //blank
 		if ( ( cfPtr = fopen( "hardware.dat", "wb+" ) ) == NULL ) { 
 			printf( "File could not be opened.\n" );
 		} 
@@ -45,7 +45,7 @@ int main ( void )
 		printf( "File could not be opened.\n" );
 	} /* end if */
 	else {
-		printf( "Previous file opened.\n" );
+		printf( "Previous file opened.\n\n" );
 		/* Menu */
 		int choice;
 
@@ -70,7 +70,8 @@ int main ( void )
 		} /* end while */
 		fclose( cfPtr ); /* close file */
 	} /* end else */
-
+	
+	system("pause");
 	return 0; /*indicate that program ended successfully */
 } /* end function main */
 
@@ -98,7 +99,7 @@ void updateTool( FILE *cfPtr )
 	while ( record != 0 ) {
 		/* Blank tool and fill with user input */
 		struct toolData tool = { 0, "", 0.0, 0 };  
-		printf( "Enter tool name, quantity, cost\n\n?" );
+		printf( "Enter tool name, quantity, cost\n\n? " );
 		scanf( "%s%d%lf", tool.toolName, &tool.quantity, &tool.cost );
 		tool.recordNum = record;
 
@@ -113,15 +114,35 @@ void updateTool( FILE *cfPtr )
 	} 
 }
 
-
 void deleteTool( FILE *cfPtr )
 {
-	printf("deleteTool function");
+	struct toolData tool = { 0, "", 0.0, 0 }; 
+	int record;
+
+	printf("\nEnter record number ( 1 to 100, 0 to return to main menu )\n\n? ");
+	scanf( "%d", &record );
+
+	if ( record != 0) {
+		/* fseek to correct location in file */
+		fseek( cfPtr, ( record -1 ) * sizeof( struct toolData ), SEEK_SET );
+
+		/* fwrite new record information */
+		fwrite( &tool, sizeof( struct toolData ), 1, cfPtr );
+
+		printf( "\nRecord # %d has been deleted.\n\n", record );
+	}
+	else printf( "\nNo record has been deleted.\n\n" );
 }
+
 void listTool( FILE *cfPtr )
 {
+	struct toolData tool = { 0, "", 0.0, 0 }; //blank
+
 	/* Print Header */
 	printf( "%-10s%-20s%-10s%-5s\n\n", "Record #", "Tool name", "Quantity", "Cost" );
+
+	/* Rewind to beginning of file */
+	rewind ( cfPtr ); 
 
 	/* Loop through Records */
 	while ( !feof( cfPtr ) ) {
