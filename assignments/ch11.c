@@ -28,7 +28,7 @@ int main ( void )
 	if( access( "hardware.dat", F_OK ) == -1 ) {
 		int i; /* counter */
 		struct toolData blankTool = { 0, "", 0.0, 0 }; //blank
-		if ( ( cfPtr = fopen( "hardware.dat", "rb+" ) ) == NULL ) { 
+		if ( ( cfPtr = fopen( "hardware.dat", "wb+" ) ) == NULL ) { 
 			printf( "File could not be opened.\n" );
 		} 
 		else {
@@ -36,6 +36,7 @@ int main ( void )
 				fwrite( &blankTool, sizeof( struct toolData ), 1, cfPtr );
 			}
 			fclose ( cfPtr ); /* close the file */
+			printf( "New file made.\n" );
 		}
 	}
 
@@ -43,6 +44,7 @@ int main ( void )
 		printf( "File could not be opened.\n" );
 	} /* end if */
 	else {
+		printf( "Previous file opened.\n" );
 		/* Menu */
 		int choice;
 
@@ -109,5 +111,14 @@ void deleteTool( FILE *cfPtr )
 }
 void listTool( FILE *cfPtr )
 {
-	printf("listTool function");
+	/* Print Header */
+	printf( "%-10s%-20s%-10s%-5s", "Record #", "Tool name", "Quantity", "Cost" );
+
+	/* Loop through Records */
+	while ( !feof( cfPtr ) ) {
+		fread( & client, sizeof( struct toolData ), 1, cfPtr );
+
+		/* Print if not blank */
+		if ( recordNum.
+//	printf("listTool function");
 }
