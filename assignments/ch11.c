@@ -14,6 +14,8 @@ struct toolData {
 	int quantity;  		/* amount of tool in stock */
 };
 
+struct toolData tool = { 0, "", 0.0, 0 }; //blank
+
 /* Function Prototypes */
 int enterChoice( void );
 void updateTool( FILE *cfPtr );
@@ -27,13 +29,12 @@ int main ( void )
 	/* Check to see if database exists and if it doesn't, make it */
 	if( access( "hardware.dat", F_OK ) == -1 ) {
 		int i; /* counter */
-		struct toolData blankTool = { 0, "", 0.0, 0 }; //blank
 		if ( ( cfPtr = fopen( "hardware.dat", "wb+" ) ) == NULL ) { 
 			printf( "File could not be opened.\n" );
 		} 
 		else {
 			for ( i = 1; i <= 100; i++ ) {
-				fwrite( &blankTool, sizeof( struct toolData ), 1, cfPtr );
+				fwrite( &tool, sizeof( struct toolData ), 1, cfPtr );
 			}
 			fclose ( cfPtr ); /* close the file */
 			printf( "New file made.\n" );
@@ -77,31 +78,39 @@ int enterChoice( void )
 {
 	int menuChoice; 
 
-	printf( "\nEnter request\n"
-		"1 - Input new tool or update an existing tool\n"
-		"2 - Delete a tool\n"
-		"3 - List all tools\n"
-		"4 - Exit\n? " );
+	printf( "Enter request\n\n"
+		"1 - Input new tool or update an existing tool\n\n"
+		"2 - Delete a tool\n\n"
+		"3 - List all tools\n\n"
+		"4 - Exit\n\n? " );
 
 	scanf( "%d", &menuChoice );  /* menu input */
 	return menuChoice;
-} /* end function enterChoice */
+} /* end function */
 
 void updateTool( FILE *cfPtr )
 {
-	/*
-	struct toolData tool;
 	int record;
 
 	printf("\nEnter record number ( 1 to 100, 0 to return to main menu )\n\n? ");
 	scanf( "%d", &record );
 
-	if 
+	while ( record != 0 ) {
+		/* Blank tool and fill with user input */
+		struct toolData tool = { 0, "", 0.0, 0 };  
+		printf( "Enter tool name, quantity, cost\n\n?" );
+		scanf( "%s%d%lf", tool.toolName, &tool.quantity, &tool.cost );
+		tool.recordNum = record;
 
+		/* fseek to correct location in file */
+		fseek( cfPtr, ( record -1 ) * sizeof( struct toolData ), SEEK_SET );
 
-	while ( ( record != 0 )
-	*/
-	printf("updateTool funtion");
+		/* fwrite new record information */
+		fwrite( &tool, sizeof( struct toolData ), 1, cfPtr );
+
+		printf("\nEnter record number ( 1 to 100, 0 to return to main menu )\n\n? ");
+		scanf( "%d", &record );
+	} 
 }
 
 
@@ -112,13 +121,15 @@ void deleteTool( FILE *cfPtr )
 void listTool( FILE *cfPtr )
 {
 	/* Print Header */
-	printf( "%-10s%-20s%-10s%-5s", "Record #", "Tool name", "Quantity", "Cost" );
+	printf( "%-10s%-20s%-10s%-5s\n\n", "Record #", "Tool name", "Quantity", "Cost" );
 
 	/* Loop through Records */
 	while ( !feof( cfPtr ) ) {
-		fread( & client, sizeof( struct toolData ), 1, cfPtr );
+		fread( &tool, sizeof( struct toolData ), 1, cfPtr );
 
 		/* Print if not blank */
-		if ( recordNum.
-//	printf("listTool function");
+		if ( tool.recordNum != 0 ) {
+			printf( "%-10d%-20s%-10d%-.2f\n\n", tool.recordNum, tool.toolName, tool.quantity, tool.cost );
+		}
+	}
 }
